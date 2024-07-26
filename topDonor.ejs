@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #4CAF50; /* Green color */
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #4CAF50; /* Green color */
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .appreciation {
+            color: #4CAF50; /* Green color */
+            font-weight: bold;
+        }
+
+        #topDonors .donor {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #topDonors .donor:last-child {
+            border-bottom: none;
+        }
+
+        #topDonors .rank,
+        #topDonors .name,
+        #topDonors .donations {
+            flex: 1;
+            text-align: center;
+        }
+
+        #topDonors .name {
+            flex: 3;
+            text-align: left;
+            padding-left: 10px;
+        }
+    </style>
+    <title>Top Blood Donors</title>
+</head>
+<body>
+
+  <header>
+    <h1>Top Blood Donors</h1>
+    <p>Recognizing the Generosity of Life Savers</p>
+  </header>
+
+  <section id="topDonors">
+    <!-- Top Donors Leaderboard will be populated dynamically using EJS -->
+    <% topDonorsData.forEach(function(donor) { %>
+        <div class="donor">
+            <span class="rank"><%= donor.UserID %></span>
+            <span class="name"><%= donor.Username %></span>
+            <span class="donations"><%= donor.Total_bottlesdonate %> </span>
+        </div>
+    <% }); %>
+  </section>
+
+  <section id="impact">
+    <!-- Impact Statistics and Success Stories will be displayed here -->
+  </section>
+
+  <section id="recognition">
+    <!-- Certificates, Badges, and Thank You Messages -->
+    <div class="appreciation">
+        <p>Thank you to our amazing donors for their selfless contributions. Your generosity has made a significant impact on saving lives.</p>
+    </div>
+  </section>
+
+  <section id="social">
+    <!-- Social Media Sharing and Event Announcements -->
+  </section>
+
+  <section id="cta">
+    <!-- Call to Action - Donation Information and Become a Top Donor -->
+  </section>
+
+  <footer>
+    <p>Contact us at: <a href="mailto:jazib3974@gmail.com">jazib3974@gmail.com</a></p>
+    <p>Last Update: November 25, 2023</p>
+  </footer>
+
+  <!-- Remove the script tag as EJS doesn't use client-side JavaScript -->
+</body>
+</html>

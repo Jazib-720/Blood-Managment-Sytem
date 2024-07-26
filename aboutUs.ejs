@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50; /* Green color */
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #4CAF50; /* Green color */
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        h2 {
+            color: #4CAF50; /* Green color */
+        }
+
+        p {
+            line-height: 1.6;
+        }
+    </style>
+    <title>About Us</title>
+</head>
+<body>
+
+  <header>
+    <h1>About Us</h1>
+  </header>
+
+  <section>
+    <h2>Our Mission</h2>
+    <p>We are dedicated to saving lives by ensuring a stable and safe blood supply. Our mission is to connect generous donors with individuals in need, providing a lifeline in critical situations.</p>
+
+    <h2>Our Story</h2>
+    <p>Founded by <%= founder %> in <%= foundingYear %>, Our blood bank has been a cornerstone in the community, working tirelessly to meet the growing demand for blood donations. Over the some period of time, we have built a network of donors, volunteers, and healthcare professionals, united by a common goal of making a positive impact on public health.</p>
+
+    <h2>Why Donate?</h2>
+    <p>Every donation counts. By donating blood, you contribute to saving lives in emergency situations, supporting patients undergoing medical treatments, and ensuring a sustainable blood supply for our community. Join us in making a difference!</p>
+  </section>
+
+  <footer>
+    <p>&copy; <%= new Date().getFullYear() %> BLOOD BANK MANAGEMENT</p>
+  </footer>
+
+</body>
+</html>

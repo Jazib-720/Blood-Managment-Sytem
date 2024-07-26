@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Profile</title>
+</head>
+<body>
+  <h1>Update Profile</h1>
+  <form action="/update-profile/<%= user.UserID %>" method="POST">
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" value="<%= user.phoneNumber %>" required>
+    <br>
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" value="<%= user.location %>" required>
+    <br>
+    <label for="bloodgroup">Blood Group:</label>
+    <input type="text" id="bloodgroup" name="bloodgroup" value="<%= user.bloodgroup %>" required>
+    <br>
+    <button type="submit">Update Profile</button>
+  </form>
+</body>
+</html>

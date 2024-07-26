@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalog</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .search-container {
+      margin: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .catalog-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px;
+    }
+
+    .blood-donor {
+      background-color: #fff;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #4caf50;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    footer {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      width: 100%;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Blood Bank Catalog</h1>
+</header>
+
+<div class="search-container">
+  <label for="citySearch">Search by City:</label>
+  <input type="text" id="citySearch" oninput="filterByCity()">
+  
+  <label for="bloodGroupSearch">Search by Blood Group:</label>
+  <select id="bloodGroupSearch" onchange="filterByBloodGroup()">
+    <option value="" selected>Select Blood Group</option>
+    <option value="A+">A+</option>
+    <option value="A-">A-</option>
+    <option value="AB+">AB+</option>
+    <option value="AB-">AB-</option>
+    <option value="B+">B+</option>
+    <option value="B-">B-</option>
+    <option value="O+">O+</option>
+    <option value="O-">O-</option>
+  </select>
+</div>
+
+<div class="catalog-container" id="catalogContainer">
+  <% bloodDonors.forEach(function(donor) { %>
+    <div class="blood-donor">
+      <h2><%= donor.username %></h2>
+      <p>Blood Group: <%= donor.bloodGroup %></p>
+      <p>Email: <%= donor.email %></p>
+      <p>City: <%= donor.city %></p>
+      <p>Phone Number: <%= donor.phoneNumber %></p>
+    </div>
+  <% }); %>
+</div>
+
+
+  <script>
+  // Simulated data (replace this with data from your database)
+const bloodDonors = <%- JSON.stringify(bloodDonors || []) %>;
+
+// Function to create HTML elements for each blood donor
+function createBloodDonorElement(donor) {
+  const bloodDonorElement = document.createElement('div');
+  bloodDonorElement.classList.add('blood-donor');
+
+  bloodDonorElement.innerHTML = `
+    <h2>${donor.Username}</h2>
+    <p>Blood Group: ${donor.BloodType}</p>
+    <p>Email: ${donor.Email}</p>
+    <p>City: ${donor.Location}</p>
+    <p>Phone Number: ${donor.phoneNumber}</p>
+  `;
+
+  return bloodDonorElement;
+}
+
+// Function to filter donors by city
+function filterByCity() {
+  const citySearchInput = document.getElementById('citySearch');
+  const searchValue = citySearchInput.value.toLowerCase();
+  
+  // Filter donors based on the city search value
+  const filteredDonors = (bloodDonors || []).filter(donor => donor.Location.toLowerCase().includes(searchValue));
+
+  // Update the catalog with the filtered donors
+  updateCatalog(filteredDonors);
+}
+
+// Function to filter donors by blood group
+function filterByBloodGroup() {
+  const bloodGroupSearch = document.getElementById('bloodGroupSearch');
+  const selectedBloodGroup = bloodGroupSearch.value;
+
+  if (selectedBloodGroup !== "") {
+    // Filter donors based on the selected blood group
+    const filteredDonors = (bloodDonors || []).filter(donor => donor.BloodType === selectedBloodGroup);
+
+    // Update the catalog with the filtered donors
+    updateCatalog(filteredDonors);
+  } else {
+    // If no blood group is selected, show all donors
+    updateCatalog(bloodDonors || []);
+  }
+}
+
+// Function to update the catalog display
+function updateCatalog(donors) {
+  const catalogContainer = document.getElementById('catalogContainer');
+  catalogContainer.innerHTML = '';
+
+  donors.forEach(donor => {
+    const bloodDonorElement = createBloodDonorElement(donor);
+    catalogContainer.appendChild(bloodDonorElement);
+  });
+}
+
+  updateCatalog(bloodDonors);
+</script>
+
+</body>
+</html>

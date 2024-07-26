@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    label, input, select {
+      width: 48%; /* Two items per line */
+      display: block;
+      margin-bottom: 8px;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    .group {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .group label {
+      width: 30%;
+    }
+
+    .group select, .group input {
+      width: 65%;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<form id="signupForm" onsubmit="return validateForm()">
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username" required>
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="phoneNumber">Phone Number:</label>
+  <input type="text" id="phoneNumber" name="phoneNumber" required>
+
+  <label for="nationality">Nationality:</label>
+  <select id="nationality" name="nationality" required>
+    <option value="pakistani">Pakistani</option>
+    <option value="other">Other</option>
+  </select>
+
+  <div class="group">
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" required <% if (nationality === "other") { %> value="<%= location %>" <% } %> >
+  </div>
+
+  <div class="group">
+    <label for="bloodGroup">Blood Group:</label>
+    <select id="bloodGroup" name="bloodGroup" required>
+      <option value="A+">A+</option>
+      <option value="A-">A-</option>
+      <option value="AB+">AB+</option>
+      <option value="AB-">AB-</option>
+      <option value="B+">B+</option>
+      <option value="B-">B-</option>
+      <option value="O+">O+</option>
+      <option value="O-">O-</option>
+    </select>
+  </div>
+
+  <div class="group">
+    <label for="robotCheck">Are you not a robot?</label>
+    <input type="checkbox" id="robotCheck" name="robotCheck" required>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  function validateForm() {
+    var nationality = document.getElementById("nationality").value;
+    var locationDiv = document.getElementById("location");
+    var locationInput = document.getElementById("location").value;
+    var phoneNumberInput = document.getElementById("phoneNumber");
+
+    // Allow only Pakistani nationals to create an account
+    if (nationality !== "pakistani") {
+      alert("Only Pakistani nationals are eligible to create an account.");
+      return false; // Prevent form submission
+    }
+
+    // Show location input only if nationality is "other"
+    if (nationality === "other") {
+      // Check if location is provided
+      if (locationInput.trim() === "") {
+        alert("Please provide a location for 'Other' nationality.");
+        return false; // Prevent form submission
+      }
+    }
+
+    // Check if the phone number is in the Pakistani format '+92xxxxxxxxxx'
+    var phoneNumberRegex = /^\+92\d{10}$/;
+    if (!phoneNumberRegex.test(phoneNumberInput.value)) {
+      alert("Please enter a valid Pakistani phone number.");
+      return false; // Prevent form submission
+    }
+
+    // Redirect to login.html
+    window.location.href = "/login";
+
+    return false; // Prevent default form submission
+  }
+
+  // Prefill the phone number input with '+92'
+  window.onload = function () {
+    var phoneNumberInput = document.getElementById("phoneNumber");
+    phoneNumberInput.value = "+92";
+  };
+
+  // Ensure the length of the phone number input is exactly 13 characters
+  document.getElementById("phoneNumber").addEventListener("input", function () {
+    var maxLength = 13;
+    if (this.value.length !== maxLength) {
+      this.setCustomValidity("Please enter a valid Pakistani phone number.");
+    } else {
+      this.setCustomValidity("");
+    }
+  });
+</script>
+
+</body>
+</html>
